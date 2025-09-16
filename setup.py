@@ -54,17 +54,80 @@ INCLUDE_FILES = [
     ("template.docx", "template.docx"),
 ]
 
+BIN_EXCLUDES = [
+    "Qt6WebEngineCore.dll",
+    "Qt6WebEngine.dll",
+    "Qt6WebEngineWidgets.dll",
+    "QtPdf.dll",
+    "QtPdfQuick.dll",
+]
 
-BIN_EXCLUDES = ["Qt6WebEngineCore.dll", "Qt6WebEngine.dll", "Qt6WebEngineWidgets.dll", "QtPdf.dll", "QtPdfQuick.dll"]
+PYSIDE_EXCLUDES = [
+    "PySide6.Qt3DAnimation",
+    "PySide6.Qt3DCore",
+    "PySide6.Qt3DExtras",
+    "PySide6.Qt3DInput",
+    "PySide6.Qt3DLogic",
+    "PySide6.Qt3DRender",
+    "PySide6.QtCharts",
+    "PySide6.QtConcurrent",
+    "PySide6.QtDataVisualization",
+    "PySide6.QtGraphs",
+    "PySide6.QtMultimedia",
+    "PySide6.QtMultimediaWidgets",
+    "PySide6.QtNetworkAuth",
+    "PySide6.QtOpenGL",
+    "PySide6.QtOpenGLWidgets",
+    "PySide6.QtPositioning",
+    "PySide6.QtQml",
+    "PySide6.QtQmlModels",
+    "PySide6.QtQuick",
+    "PySide6.QtQuick3D",
+    "PySide6.QtQuickControls2",
+    "PySide6.QtQuickWidgets",
+    "PySide6.QtRemoteObjects",
+    "PySide6.QtSensors",
+    "PySide6.QtSerialPort",
+    "PySide6.QtStateMachine",
+    "PySide6.QtTextToSpeech",
+    "PySide6.QtVirtualKeyboard",
+    "PySide6.QtWebChannel",
+    "PySide6.QtWebEngine",
+    "PySide6.QtWebEngineCore",
+    "PySide6.QtWebEngineQuick",
+    "PySide6.QtWebEngineWidgets",
+    "PySide6.QtWebSockets",
+    "PySide6.QtWebView",
+    "PySide6.QtXml",
+    "PySide6.QtXmlPatterns",
+]
 
-EXCLUDES_MODULES = ["tkinter", "PySide6.QtWebEngineWidgets", "PySide6.QtWebEngineCore", "PySide6.QtWebEngine", "PySide6.QtWebEngineQuick", "PySide6.QtWebEngineProcess", "PySide6.QtWebEngineCore.DebugTools"]
+THIRD_PARTY_EXCLUDES = [
+    # "babel",
+    "backports",
+    "importlib_metadata",
+    # "jaraco",
+    # "jinja2",
+    # "markupsafe",
+    # "more_itertools",
+    # "packaging",
+    # "platformdirs",
+    # "pkg_resources",
+    "setuptools",
+    "wheel",
+    "zipp",
+]
 
 build_exe_options = {
     "packages": PACKAGES,
     "includes": INCLUDES,
     "include_files": INCLUDE_FILES,
     "include_msvcr": True,
-    "excludes": EXCLUDES_MODULES,
+    "excludes": [
+        "tkinter",
+        *PYSIDE_EXCLUDES,
+        *THIRD_PARTY_EXCLUDES,
+    ],
     "build_exe": BUILD_DIR,
     "bin_excludes": BIN_EXCLUDES,
 }
