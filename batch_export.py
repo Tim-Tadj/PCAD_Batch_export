@@ -50,33 +50,37 @@ def pdf_to_txt(input_path, output_path):
         for page in range(len(reader.pages)):
             text += reader.pages[page].extract_text()
     
-    match = re.search(r"Load Maximum Demand : (\d+(\.\d+)?)", text)
-    if match:
-        data[basename].update({"Load Maximum Demand": match.group(1)})
-        
-    match = re.search(r"Rating : (\d+(\.\d+)?)", text)
-    if match:
-        data[basename].update({"CB Rating": match.group(1)})
-    else:
-        match = re.search(r"Rating \(In\) : (\d+(\.\d+)?)", text)
-        if match:
-            data[basename].update({"CB Rating": match.group(1)})
-    
-    match = re.search(r"Trip : (\d+(\.\d+)?)", text)
-    if match:
-        data[basename].update({"CB Rating": match.group(1)})
-    
-    match = re.search(r"Current Capacity : (\d+(\.\d+)?)", text)
-    if match:
-        data[basename].update({"Current Capacity": match.group(1)})
-    
-    match = re.search(r"Max\. Circuit Impedance \(max\. Zint\) : (\d+(\.\d+)?)", text)
-    if match:
-        data[basename].update({"MAX EF impedence": match.group(1)})
+    # Helper: remove thousands separators
+    def _clean(num_str):
+        return num_str.replace(',', '')
 
-    match = re.search(r"Earth Fault Loop Impedance \(Zint\) : (\d+(\.\d+)?)", text)
+    match = re.search(r"Load Maximum Demand\s*:\s*([\d,]+(?:\.\d+)?)", text)
     if match:
-        data[basename].update({"EF impedence": match.group(1)})
+        data[basename].update({"Load Maximum Demand": _clean(match.group(1))})
+        
+    match = re.search(r"Rating\s*:\s*([\d,]+(?:\.\d+)?)", text)
+    if match:
+        data[basename].update({"CB Rating": _clean(match.group(1))})
+    else:
+        match = re.search(r"Rating \(In\)\s*:\s*([\d,]+(?:\.\d+)?)", text)
+        if match:
+            data[basename].update({"CB Rating": _clean(match.group(1))})
+    
+    match = re.search(r"Trip\s*:\s*([\d,]+(?:\.\d+)?)", text)
+    if match:
+        data[basename].update({"CB Rating": _clean(match.group(1))})
+    
+    match = re.search(r"Current Capacity\s*:\s*([\d,]+(?:\.\d+)?)", text)
+    if match:
+        data[basename].update({"Current Capacity": _clean(match.group(1))})
+    
+    match = re.search(r"Max\. Circuit Impedance \(max\. Zint\)\s*:\s*([\d,]+(?:\.\d+)?)", text)
+    if match:
+        data[basename].update({"MAX EF impedence": _clean(match.group(1))})
+
+    match = re.search(r"Earth Fault Loop Impedance \(Zint\)\s*:\s*([\d,]+(?:\.\d+)?)", text)
+    if match:
+        data[basename].update({"EF impedence": _clean(match.group(1))})
     
     return data
 
@@ -108,7 +112,7 @@ def batch_export_process(input_files, output_files, output_folder, progress_queu
             window.menu_item(u'&File->&Print...').select()
 
             window = pwa_app.window(title_re="PowerCad-5 Reports")
-            ctrl = window['TCheckBox43']
+            ctrl = window['TCheckBox44']  # 43 for PCAD 5.0.80.1, 44 for PCAD 5.0.80.2
             ctrl.click()
 
             ctrl = window['TBitBtn6']

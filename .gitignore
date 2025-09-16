@@ -2,6 +2,7 @@
 /output
 /versions
 /dist
+/test
 
 uv.lock
 
