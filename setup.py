@@ -2,7 +2,7 @@ from cx_Freeze import Executable, setup
 import sys
 
 APP_NAME = "PCAD Batch Export"
-APP_VERSION = "0.3.4"
+APP_VERSION = "0.3.5"
 APP_DESCRIPTION = "Batch export tool for PCAD files."
 TARGET_EXE = "PCAD_Batch_Export.exe"
 BUILD_DIR = "dist/PCAD_Batch_Export"
@@ -104,8 +104,8 @@ PYSIDE_EXCLUDES = [
 
 THIRD_PARTY_EXCLUDES = [
     # "babel",
-    "backports",
-    "importlib_metadata",
+    # "backports",
+    # "importlib_metadata",
     # "jaraco",
     # "jinja2",
     # "markupsafe",
@@ -113,9 +113,9 @@ THIRD_PARTY_EXCLUDES = [
     # "packaging",
     # "platformdirs",
     # "pkg_resources",
-    "setuptools",
-    "wheel",
-    "zipp",
+    # "setuptools",
+    # "wheel",
+    # "zipp",
 ]
 
 build_exe_options = {
@@ -158,12 +158,12 @@ bdist_msi_options = {
     "data": {"Shortcut": shortcut_table},
 }
 
-base = "Win32GUI" if sys.platform == "win32" else None
+# base = "Win32GUI" if sys.platform == "win32" else None
 
 executables = [
     Executable(
         "batch_export.py",
-        base=base,
+        # base=base,
         target_name=TARGET_EXE,
     )
 ]
