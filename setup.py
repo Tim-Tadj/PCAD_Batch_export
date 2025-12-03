@@ -2,7 +2,7 @@ from cx_Freeze import Executable, setup
 import sys
 
 APP_NAME = "PCAD Batch Export"
-APP_VERSION = "0.3.5"
+APP_VERSION = "0.3.6"
 APP_DESCRIPTION = "Batch export tool for PCAD files."
 TARGET_EXE = "PCAD_Batch_Export.exe"
 BUILD_DIR = "dist/PCAD_Batch_Export"
