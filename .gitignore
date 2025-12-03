@@ -4,6 +4,8 @@
 /dist
 /test
 
+test.py
+
 uv.lock
 
 .venv

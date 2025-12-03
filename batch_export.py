@@ -112,10 +112,10 @@ def batch_export_process(input_files, output_files, output_folder, progress_queu
             window.menu_item(u'&File->&Print...').select()
 
             window = pwa_app.window(title_re="PowerCad-5 Reports")
-            ctrl = window['TCheckBox44']  # 43 for PCAD 5.0.80.1, 44 for PCAD 5.0.80.2 IMPORTANT: May change in future versions
+            ctrl = window['Earth Fault Loop Impedance'] 
             ctrl.click()
 
-            ctrl = window['TBitBtn6']
+            ctrl = window['Print...']
             ctrl.click()
 
             window = pwa_app.window(title_re="Print")
